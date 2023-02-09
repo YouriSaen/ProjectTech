@@ -4,7 +4,10 @@
   "description": "test",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "precompress": "{{ executes BEFORE the `compress` script }}",
+    "compress": "{{ run command to compress files }}",
+    "postcompress": "{{ executes AFTER `compress` script }}"
   },
   "repository": {
     "type": "git",
@@ -16,5 +19,10 @@
   "bugs": {
     "url": "https://github.com/YouriSaen/ProjectTech/issues"
   },
-  "homepage": "https://github.com/YouriSaen/ProjectTech#readme"
+  "homepage": "https://github.com/YouriSaen/ProjectTech#readme",
+  "dependencies": {
+    "camel-case": "^4.1.2"
+  }
 }
+
+
