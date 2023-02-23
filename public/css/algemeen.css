@@ -1,0 +1,25 @@
+:root{
+    --font-body: Inter, sans-serif;
+    --background-color: #ffffd3;
+    --button-color: #3E363F;
+    --button-inside-color: #ffffff;
+}
+/* 
+body{
+    background-color: aquamarine;
+    font-family: var(--font-body);
+}
+
+h1{
+    font-family: var(--font-body);
+} */
+
+li {
+    font-size: 2rem;
+    width: 300px;
+    margin: 4px;
+    padding: 4px;
+    list-style: none
+    }
+    .midlaner {background-color: #eeeeee}
+    .toplaner {background-color: #ffea00}
