@@ -8,7 +8,7 @@ section{
 }
 
 /* Img */
-section > section {
+section > section{
     padding-top: .5em;
     grid-row-start: 2;
     grid-column-start: 2;
@@ -21,7 +21,7 @@ section > section {
 }
 
 /* Edit button */
-section > section > section{
+section > div{
     height: 3.75em;
     width: 3.75em;
     display: flex;
@@ -34,6 +34,6 @@ section > section > section{
 }
 
 /* Edit text */
-section > section > section > p{
+section > section > div > p{
     margin: auto;
 }
