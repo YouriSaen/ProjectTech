@@ -1,5 +1,5 @@
 /* Grid */
-section{
+.grid{
     display: grid;
     grid-template-columns: 1fr max-content 1fr;
     column-gap: .25em;
@@ -8,7 +8,7 @@ section{
 }
 
 /* Img */
-section > section{
+.profileImg{
     padding-top: .5em;
     grid-row-start: 2;
     grid-column-start: 2;
@@ -17,11 +17,11 @@ section > section{
     height: 12.5em;
     border: 1px solid black;
     border-radius: 50%;
-    background-image: url(./assets/zelensky.jpeg);
+    background-image: url(/assets/zelensky.jpeg);
 }
 
 /* Edit button */
-section > div{
+.editButton{
     height: 3.75em;
     width: 3.75em;
     display: flex;
@@ -34,6 +34,6 @@ section > div{
 }
 
 /* Edit text */
-section > section > div > p{
+.editButton > p{
     margin: auto;
 }

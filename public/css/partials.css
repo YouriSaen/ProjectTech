@@ -1,7 +1,7 @@
-/* General */
+/* General Calender*/
 .parent {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(5, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
@@ -18,6 +18,13 @@
         display: inherit;
         font-family: Inter, sans-serif;
     }
+
+    .testImage{
+        content: url(../assets/zelensky.jpeg);
+        height: 1em;
+        width: 1em;
+        margin: 0 0 0.2em 0.1em;
+    }
     
     /* Calender header */
 
@@ -25,7 +32,7 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        grid-area: 1 / 1 / 2 / 6; 
+        grid-area: 1 / 1 / 2 / 4; 
         border-bottom: 2px solid black;
         align-items: center;
     }
@@ -72,13 +79,13 @@
     }
 
     .leftArrow{
-        content: url(./assets/arrow_left.png);
+        content: url(../assets/arrow_left.png);
         height: 1em;
         width: 1em;
     }
 
     .rightArrow{
-        content: url(./assets/arrow_right.png);
+        content: url(../assets/arrow_right.png);
         height: 1em;
         width: 1em;
         order: 1;
@@ -94,7 +101,7 @@
     /* Morning space */
     
     .morningSpace { 
-        grid-area: 2 / 1 / 6 / 3;
+        grid-area: 2 / 1 / 6 / 2;
         
         display: flex;
         flex-direction: column;
@@ -112,8 +119,10 @@
         border-right: transparent;
     }
 
-    .testP{
+    .headerSpace{
+        font-size: 0.8em;
         margin: 0;
+        align-self: center;
     }
 
     .activitiesSpaceEnd{
@@ -126,7 +135,7 @@
 
     /* Midday space */
     .middaySpace { 
-        grid-area: 2 / 3 / 6 / 4;
+        grid-area: 2 / 2 / 6 / 3;
 
         display: flex;
         flex-direction: column;
@@ -135,6 +144,11 @@
     }
 
     .activitiesSpaceMidday{
+        display: flex;
+        flex-direction: row;
+        gap: 0.5em;
+        align-items: end;
+
         width: 100%;
         height: 1.375em;
         border: 1px solid black;
@@ -147,7 +161,7 @@
 
     /* Evening space */
     .eveningSpace { 
-        grid-area: 2 / 4 / 6 / 6; 
+        grid-area: 2 / 3 / 6 / 4; 
 
         display: flex;
         flex-direction: column;
@@ -165,3 +179,45 @@
         border-left: transparent;
     }
     
+
+
+    /* Profile img */
+    /* Grid */
+.grid{
+    display: grid;
+    grid-template-columns: 1fr max-content 1fr;
+    column-gap: .25em;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+/* Img */
+.profileImg{
+    padding-top: .5em;
+    grid-row-start: 2;
+    grid-column-start: 2;
+    display: flex;
+    width: 12.5em;
+    height: 12.5em;
+    border: 1px solid black;
+    border-radius: 50%;
+    background-image: url(/assets/zelensky.jpeg);
+}
+
+/* Edit button */
+.editButton{
+    height: 3.75em;
+    width: 3.75em;
+    display: flex;
+    border: 1px solid black;
+    background-color: white !important; 
+    border-radius: 50%;
+    margin-left: auto;
+    align-items: center;
+    font-family: 'Inter';
+}
+
+/* Edit text */
+.editButton > p{
+    margin: auto;
+}
