@@ -1,4 +1,4 @@
-:root{
+:root {
     --font-body: Inter, sans-serif;
     --background-color: #ffffd3;
     --button-color: #3E363F;
@@ -6,18 +6,36 @@
     --black: #000;
 }
 
-body{
+body {
     display: flex;
     gap: 2em;
     flex-direction: column;
     align-items: center;
     background-color: var(--background-color);
+    margin-left: 0;
+    margin-right: 0;
 }
 
-   /* Profile info*/
+button,
+input[type="submit"],
+input[type="reset"] {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
 
-   /* Img */
-   .profileImg {
+a{
+    all: unset;
+}
+
+/* Profile info*/
+
+/* Img */
+.profileImg {
     padding-top: .5em;
     grid-row-start: 2;
     grid-column-start: 2;
@@ -62,7 +80,7 @@ body{
 .profileInfo>p {
     margin-top: 0;
     font-size: small;
-    
+
 }
 
 
@@ -82,7 +100,7 @@ body{
     background-color: var(--white);
     border-radius: 15%;
 
-    filter: drop-shadow(0 3px 0 var(--black));
+    filter: drop-shadow(0 3px 3px var(--black));
 }
 
 h2,
@@ -199,7 +217,7 @@ p {
     align-self: center;
 }
 
-.headerSpace > span{
+.headerSpace>span {
     display: block;
 }
 
@@ -259,6 +277,171 @@ p {
     border-left: transparent;
 }
 
+
+/* Calender setup */
+
+.headerSpaceSetup {
+    font-size: 0.8em;
+    margin: 0;
+}
+
+/* Morning space Setup*/
+
+.morningSpaceSetup {
+    grid-area: 2 / 1 / 6 / 2;
+
+    display: flex;
+    flex-direction: column;
+
+
+    border-right: 2px solid var(--black);
+}
+
+.activitiesSpaceMorningSetup {
+    width: 75%;
+    height: 1.375em;
+    border: 1px solid var(--black);
+    background-color: var(--white);
+    border-right: transparent;
+}
+
+.headerSpaceSetup {
+    font-size: 0.8em;
+    margin: 0;
+    align-self: center;
+}
+
+.headerSpacSetupe>span {
+    display: block;
+}
+
+/* Midday space */
+
+.middaySpaceSetup {
+    grid-area: 2 / 2 / 6 / 3;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.activitiesSpaceMiddaySetup {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+
+    width: 100%;
+    height: 1.375em;
+    border: 1px solid var(--black);
+    background-color: var(--white);
+    border-right: transparent;
+    border-left: transparent;
+}
+
+
+
+/* Evening space Setup*/
+
+.eveningSpaceSetup {
+    grid-area: 2 / 3 / 6 / 4;
+
+    display: flex;
+    flex-direction: column;
+
+    border-left: 2px solid var(--black);
+}
+
+.activitiesSpaceEveningSetup {
+    width: 75%;
+    height: 1.375em;
+    border: 1px solid var(--black);
+    background-color: var(--white);
+    border-left: transparent;
+}
+
+.disableSpace {
+    content: url(../assets/red-cross.png);
+    width: 2em;
+    height: 2em;
+}
+
+.disableBtn {
+    margin-top: auto;
+}
+
+
+/* Activities list */
+
+.activitiesList {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.activitiesList>input[type=text] {
+    padding: 0.5em 0.5em;
+    border-radius: 2em;
+    box-sizing: border-box;
+    font-family: var(--font-body);
+    color: var(--black);
+    background-color: var(--white);
+    width: 90%;
+    align-self: center;
+    margin-bottom: 1em;
+}
+
+.headerList {
+    font-family: var(--font-body);
+    color: var(--black);
+    border-bottom: 2px solid var(--black);
+    margin-bottom: 0.4em;
+}
+
+.activitiesListBtns {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.acitvitySetupBtn {
+    border: 1px solid var(--black);
+    background-color: var(--white);
+    display: inline-block;
+    padding: 0.1em 0.5em;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 2em;
+    box-sizing: border-box;
+    font-family: var(--font-body);
+    color: var(--black);
+    background-color: var(--white);
+    text-align: center;
+    filter: drop-shadow(0 1px 3px var(--black));
+    width: 30%;
+}
+
+.doneFooter{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.doneBtn{
+    border: 1px solid var(--black);
+    background-color: var(--white);
+    display: inline-block;
+    padding: 0.6em 0.5em;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 2em;
+    box-sizing: border-box;
+    font-family: var(--font-body);
+    font-size:larger;
+    color: var(--white);
+    background-color: var(--button-color);
+    text-align: center;
+    filter: drop-shadow(0 1px 3px var(--black));
+    width: 70%;
+    position: fixed;
+    bottom: 0;
+}
 
 
 /* Footer */

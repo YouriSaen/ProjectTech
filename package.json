@@ -23,12 +23,16 @@
   "dependencies": {
     "camel-case": "^4.1.2",
     "chalk": "^4.1.2",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-handlebars": "^6.0.7",
     "handlebars": "^4.7.7",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "mongodb": "^5.1.0",
+    "mongoose": "^7.0.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
   }
+
 }
