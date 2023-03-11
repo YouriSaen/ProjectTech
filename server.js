@@ -39,6 +39,7 @@ async function getData(){
     console.log(docs);
 }
 
+global.getData = getData;
 
 
 //Sets our app to use the handlebars engine
@@ -52,9 +53,46 @@ app.engine('hbs', handlebars.engine({
     partialsDir: __dirname + '/views/partials/'
 }));
 
+// Functions
 
+function makeDays(){
+    const morningSpace = document.querySelector(".morningSpace")
+const middaySpace = document.querySelector(".middaySpace");
+const eveningSpace = document.querySelector(".eveningSpace");
+
+
+function createSpaceMorning(){
+    const morningSpaceActivities = document.createElement('div');
+    morningSpaceActivities.className = 'activitiesSpaceMorning';
+    morningSpace.appendChild(morningSpaceActivities);
+}
+
+function createSpaceMidday(){
+    const middaySpaceActivities = document.createElement('div');
+    middaySpaceActivities.className = 'activitiesSpaceMidday';
+    middaySpace.appendChild(middaySpaceActivities);
+}
+
+function createSpaceEvening(){
+    const eveningSpaceActivities = document.createElement('div');
+    eveningSpaceActivities.className = 'activitiesSpaceEvening';
+    eveningSpace.appendChild(eveningSpaceActivities);
+}
+
+for(i = 0; i < 7; i++){
+    createSpaceMorning();
+    createSpaceMidday();
+    createSpaceEvening();
+} 
+}
+
+
+
+
+// routes
 app.get('/', (req, res) => {
     res.render('main', { layout: 'index' });
+    makeDays();
 });
 
 app.get('/activities', async (req, res) => {
