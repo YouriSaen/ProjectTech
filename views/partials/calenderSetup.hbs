@@ -21,15 +21,15 @@
     {{!-- MORNING --}}
     <sector class="morningSpaceSetup"> 
         <button class="headerSpaceSetup" name="timespaceBtn" value="morning"> &#127749; Morning</button>
+        <form class="activatedListSetup" action="/deleteData" method="DELETE"></form>
         <button class="disableBtn"><img class="disableSpace"></button>
     </sector>
 
 
     {{!-- MIDDAY --}}
     <sector class="middaySpaceSetup">
-        <form class="activatedListSetup" action="/post-name" method="POST">
             <button class="headerSpaceSetup" name="timespaceBtn" value="midday">&#128262; Midday</button>
-        </form>
+            <form class="activatedListSetup" action="/deleteData" method="DELETE"></form>
         <button class="disableBtn"><img class="disableSpace"></button>
 
     </sector>
@@ -37,9 +37,7 @@
     {{!-- EVENING --}}
     <sector class="eveningSpaceSetup">
         <button class="headerSpaceSetup" name="timespaceBtn" value="evening">&#127769; Evening</button>
-        <form class="activatedListSetup" action="/deleteData" method="DELETE">
-        
-        </form>
+        <form class="activatedListSetup" action="/deleteData" method="DELETE"></form>
         <button class="disableBtn"><img class="disableSpace"></button>
     </sector>
 </sector>

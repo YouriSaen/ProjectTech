@@ -89,9 +89,9 @@ app.get('/activities', async (req, res) => {
 });
 
 app.post('/post-name', (req, res) => {
-    let collectionTimespace = JSON.stringify(req.body.timespaceBtn);
-    console.log(collectionTimespace);
-    const activitiesCollection = client.db('calenderdb').collection(collectionTimespace);
+    // let collectionTimespace = JSON.stringify(req.body.timespaceBtn);
+    // console.log(collectionTimespace);
+    const activitiesCollection = client.db('calenderdb').collection('morning');
     const name = req.body.name;
   console.log('Name:', name);
       activitiesCollection.insertOne({ name }, (err, result) => {

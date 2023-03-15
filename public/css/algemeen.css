@@ -315,10 +315,11 @@ p {
 .activatedListSetup{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content:start;
+    margin: 0.2em;
     gap: 0.5em;
+    overflow-x: auto;
     flex-wrap: wrap;
-    margin: 1em;
 }
 
 .activatedListBtnSetup{
