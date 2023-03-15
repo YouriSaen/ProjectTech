@@ -1,39 +1,92 @@
 {{!-- BACKGROUND--}}
 <a href="/activities">
-<div class="parent">
+<section class="parent">
     {{!-- HEADER --}}
-    <div class="calenderHeader">
-        <div class="calenderMiddle">
+    <section class="calenderHeader">
+        <section class="calenderMiddle">
             <h2>Februari</h2>
             <h3>20 - 26</h3>
-        </div>
+        </section>
 
-        <div class="calenderLeft">
+        <section class="calenderLeft">
             <img class="leftArrow">
             <p class="dateShift">13-19</p>
-        </div>
+        </section>
 
-        <div class="calenderRight">
+        <section class="calenderRight">
             <img class="rightArrow">
             <p class="dateShift">27 - 05</p>
-        </div>
-    </div>
+        </section>
+    </section>
     
     {{!-- MORNING --}}
-    <div class="morningSpace"> 
+    <section class="morningSpace"> 
 
         <p class="headerSpace"> &#127749; Morning</p>
-    </div>
+        {{!-- <section class="activitiesSpaceMorning"></section>
+        <section class="activitiesSpaceMorning"></section>
+        <section class="activitiesSpaceMorning"></section>
+        <section class="activitiesSpaceMorning"></section>
+        <section class="activitiesSpaceMorning"></section>
+        <section class="activitiesSpaceMorning"></section>
+        <section class="activitiesSpaceMorning"></section> --}}
+    </section>
 
 
     {{!-- MIDDAY --}}
-    <div class="middaySpace">
+    <section class="middaySpace">
         <p class="headerSpace">&#128262; Midday</p>
-    </div>
+        {{!-- <section class="activitiesSpaceMidday"></section>
+        <section class="activitiesSpaceMidday"></section>
+        <section class="activitiesSpaceMidday"></section>
+        <section class="activitiesSpaceMidday"></section>
+        <section class="activitiesSpaceMidday"></section>
+        <section class="activitiesSpaceMidday"></section>
+        <section class="activitiesSpaceMidday"></section> --}}
+    </section>
 
     {{!-- EVENING --}}
-    <div class="eveningSpace">
+    <section class="eveningSpace">
         <p class="headerSpace">&#127769; Evening</p>
-    </div>
-</div>
+        {{!-- <section class="activitiesSpaceEvening"></section>
+        <section class="activitiesSpaceEvening"></section>
+        <section class="activitiesSpaceEvening"></section>
+        <section class="activitiesSpaceEvening"></section>
+        <section class="activitiesSpaceEvening"></section>
+        <section class="activitiesSpaceEvening"></section>
+        <section class="activitiesSpaceEvening"></section> --}}
+    </section>
+</section>
 </a>
+
+<script>
+    const morningSpace = document.querySelector(".morningSpace")
+const middaySpace = document.querySelector(".middaySpace");
+const eveningSpace = document.querySelector(".eveningSpace");
+
+
+function createSpaceMorning(){
+    const morningSpaceActivities = document.createElement('div');
+    morningSpaceActivities.className = 'activitiesSpaceMorning';
+    -
+    morningSpace.appendChild(morningSpaceActivities);
+}
+
+function createSpaceMidday(){
+    const middaySpaceActivities = document.createElement('div');
+    middaySpaceActivities.className = 'activitiesSpaceMidday';
+    middaySpace.appendChild(middaySpaceActivities);
+}
+
+function createSpaceEvening(){
+    const eveningSpaceActivities = document.createElement('div');
+    eveningSpaceActivities.className = 'activitiesSpaceEvening';
+    eveningSpace.appendChild(eveningSpaceActivities);
+}
+
+for(i = 0; i < 7; i++){
+    createSpaceMorning();
+    createSpaceMidday();
+    createSpaceEvening();
+} 
+</script>

@@ -1,40 +1,64 @@
 {{!-- BACKGROUND--}}
-<div class="parent">
+<sector class="parent">
     {{!-- HEADER --}}
-    <div class="calenderHeader">
-        <div class="calenderMiddle">
+    <sector class="calenderHeader">
+        <sector class="calenderMiddle">
             <h2>Maandag</h2>
             <h3>20-02</h3>
-        </div>
+        </sector>
 
-        <div class="calenderLeft">
+        <sector class="calenderLeft">
             <img class="leftArrow">
             <p class="dateShift">Zondag</p>
-        </div>
+        </sector>
 
-        <div class="calenderRight">
+        <sector class="calenderRight">
             <img class="rightArrow">
             <p class="dateShift">Dinsdag</p>
-        </div>
-    </div>
+        </sector>
+    </sector>
     
     {{!-- MORNING --}}
-    <div class="morningSpaceSetup"> 
-        <p class="headerSpaceSetup"> &#127749; Morning</p>
+    <sector class="morningSpaceSetup"> 
+        <button class="headerSpaceSetup" name="timespaceBtn" value="morning"> &#127749; Morning</button>
         <button class="disableBtn"><img class="disableSpace"></button>
-    </div>
+    </sector>
 
 
     {{!-- MIDDAY --}}
-    <div class="middaySpaceSetup">
-        <p class="headerSpaceSetup">&#128262; Midday</p>
+    <sector class="middaySpaceSetup">
+        <form class="activatedListSetup" action="/post-name" method="POST">
+            <button class="headerSpaceSetup" name="timespaceBtn" value="midday">&#128262; Midday</button>
+        </form>
         <button class="disableBtn"><img class="disableSpace"></button>
 
-    </div>
+    </sector>
 
     {{!-- EVENING --}}
-    <div class="eveningSpaceSetup">
-        <p class="headerSpaceSetup">&#127769; Evening</p>
+    <sector class="eveningSpaceSetup">
+        <button class="headerSpaceSetup" name="timespaceBtn" value="evening">&#127769; Evening</button>
+        <form class="activatedListSetup" action="/deleteData" method="DELETE">
+        
+        </form>
         <button class="disableBtn"><img class="disableSpace"></button>
-    </div>
-</div>
+    </sector>
+</sector>
+
+<script>
+
+    const activatedBtnList = document.querySelector(".activatedListSetup");
+
+    function createActivatedBtn(){
+        const activatedBtn = document.createElement('button');
+        activatedBtn.className = 'activatedListBtnSetup';
+        activatedBtn.type = 'submit';
+        activatedBtn.name = 'deleteName';
+        activatedBtn.value = '{{activatedActivity}}';
+
+        activatedBtnList.appendChild(activatedBtn);
+    }
+
+     for(i = 0; i < {{activatedNmb}}; i++){
+        createActivatedBtn();
+    }
+</script>

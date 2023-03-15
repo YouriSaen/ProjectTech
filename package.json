@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/YouriSaen/ProjectTech#readme",
   "dependencies": {
+    "body-parser": "^1.20.2",
     "camel-case": "^4.1.2",
     "chalk": "^4.1.2",
     "dotenv": "^16.0.3",
@@ -34,5 +35,4 @@
   "devDependencies": {
     "nodemon": "^2.0.20"
   }
-
 }

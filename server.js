@@ -2,6 +2,7 @@ require('dotenv').config();
 //Loads Express module
 const express = require('express');
 const app = express();
+
 const port = process.env.PORT || 3000;
 
 
@@ -33,18 +34,11 @@ client.connect()
     .catch((err) => console.log('@@-- error', err));
 
 
-async function getData(){
-    const collection = await client.db('calenderdb').collection('activities');
-    const docs = await collection.find().toArray();
-    console.log(docs);
-}
-
-global.getData = getData;
-
 
 //Sets our app to use the handlebars engine
 app.set('view engine', 'hbs');
 app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
 //Sets handlebars configurations (we will go through them later on)
 app.engine('hbs', handlebars.engine({
     layoutsDir: __dirname + '/views/layouts',
@@ -53,52 +47,74 @@ app.engine('hbs', handlebars.engine({
     partialsDir: __dirname + '/views/partials/'
 }));
 
-// Functions
-
-function makeDays(){
-    const morningSpace = document.querySelector(".morningSpace")
-const middaySpace = document.querySelector(".middaySpace");
-const eveningSpace = document.querySelector(".eveningSpace");
-
-
-function createSpaceMorning(){
-    const morningSpaceActivities = document.createElement('div');
-    morningSpaceActivities.className = 'activitiesSpaceMorning';
-    morningSpace.appendChild(morningSpaceActivities);
-}
-
-function createSpaceMidday(){
-    const middaySpaceActivities = document.createElement('div');
-    middaySpaceActivities.className = 'activitiesSpaceMidday';
-    middaySpace.appendChild(middaySpaceActivities);
-}
-
-function createSpaceEvening(){
-    const eveningSpaceActivities = document.createElement('div');
-    eveningSpaceActivities.className = 'activitiesSpaceEvening';
-    eveningSpace.appendChild(eveningSpaceActivities);
-}
-
-for(i = 0; i < 7; i++){
-    createSpaceMorning();
-    createSpaceMidday();
-    createSpaceEvening();
-} 
-}
-
-
-
-
 // routes
 app.get('/', (req, res) => {
     res.render('main', { layout: 'index' });
-    makeDays();
 });
 
 app.get('/activities', async (req, res) => {
-    res.render('activities', { layout: 'activities' });
-    getData();
+    const activitiesCollection = await client.db('calenderdb').collection('activities');
+    // const activities = await activitiesCollection.find().toArray();
+    const query = {};
+    const projection = { name: 1, _id: 0 };
+    const cursor = activitiesCollection.find(query, projection);
+    const data = await cursor.toArray();
+    const namesNmb = data.length;
+    const names = data.map(data => data.name);
+    // console.log(names);
+    let a = {};
+
+    for (var i = 0; i < data.length; i++) {
+       a = names[i]
+    }
+    // console.log(a);
+
+
+
+    const activatedCollection = await client.db('calenderdb').collection('morning');
+    const activatedCursor = activatedCollection.find(query,projection);
+    const activatedData = await activatedCursor.toArray();
+    const activatedNames = activatedData.map(activatedData => activatedData.name);
+    const activatedNmb = activatedNames.length;
+
+    // console.log(activities);
+    res.render('activities', { 
+        layout: 'activities',
+        activatedActivity: activatedNames,
+        activatedNmb: activatedNmb,
+        activity: a,
+        namesLength: namesNmb
+    })
     
 });
 
+app.post('/post-name', (req, res) => {
+    let collectionTimespace = JSON.stringify(req.body.timespaceBtn);
+    console.log(collectionTimespace);
+    const activitiesCollection = client.db('calenderdb').collection(collectionTimespace);
+    const name = req.body.name;
+  console.log('Name:', name);
+      activitiesCollection.insertOne({ name }, (err, result) => {
+        if (err) {
+          console.error(err);
+          client.close();
+          return res.status(500).json({ error: 'Failed to insert name' });
+        }
+        client.close();
+        res.json({ message: 'Name inserted successfully' });
+      });
+      res.redirect('/activities');
+    });
+
+app.get('/deleteData', function(req, res) {
+    const deleteName = req.body.deleteName;
+    const activatedCollection = client.db('calenderdb').collection('morning');
+    console.log('Deleted data with ID ' + deleteName);
+    activatedCollection.deleteOne({ deleteName }, function(err, result) {
+      if (err) throw err;
+      console.log('Deleted data with ID ' + deleteName);
+      
+    });
+    res.redirect('/activities');
+  });
 app.listen(port, () => console.log(`App listening to port ${port}`));

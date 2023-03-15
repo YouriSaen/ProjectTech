@@ -283,6 +283,7 @@ p {
 .headerSpaceSetup {
     font-size: 0.8em;
     margin: 0;
+    font-family: var(--font-body);
 }
 
 /* Morning space Setup*/
@@ -309,6 +310,21 @@ p {
     font-size: 0.8em;
     margin: 0;
     align-self: center;
+}
+
+.activatedListSetup{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 0.5em;
+    flex-wrap: wrap;
+    margin: 1em;
+}
+
+.activatedListBtnSetup{
+    background-image: url(/assets/zelensky.jpeg);
+    width: 1em;
+    height: 1em;
 }
 
 .headerSpacSetupe>span {
@@ -346,6 +362,8 @@ p {
 
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
+    
 
     border-left: 2px solid var(--black);
 }
@@ -399,6 +417,7 @@ p {
 .activitiesListBtns {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
 }
 
