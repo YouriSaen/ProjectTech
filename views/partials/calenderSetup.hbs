@@ -17,9 +17,9 @@
             <p class="dateShift">Dinsdag</p>
         </sector>
     </sector>
-    
+
     {{!-- MORNING --}}
-    <sector class="morningSpaceSetup"> 
+    <sector class="morningSpaceSetup">
         <button class="headerSpaceSetup" name="timespaceBtn" value="morning"> &#127749; Morning</button>
         <form class="activatedListSetup" action="/deleteData" method="DELETE"></form>
         <button class="disableBtn"><img class="disableSpace"></button>
@@ -28,8 +28,8 @@
 
     {{!-- MIDDAY --}}
     <sector class="middaySpaceSetup">
-            <button class="headerSpaceSetup" name="timespaceBtn" value="midday">&#128262; Midday</button>
-            <form class="activatedListSetup" action="/deleteData" method="DELETE"></form>
+        <button class="headerSpaceSetup" name="timespaceBtn" value="midday">&#128262; Midday</button>
+        <form class="activatedListSetup" action="/deleteData" method="DELETE"></form>
         <button class="disableBtn"><img class="disableSpace"></button>
 
     </sector>
@@ -46,7 +46,7 @@
 
     const activatedBtnList = document.querySelector(".activatedListSetup");
 
-    function createActivatedBtn(){
+    function createActivatedBtn() {
         const activatedBtn = document.createElement('button');
         activatedBtn.className = 'activatedListBtnSetup';
         activatedBtn.type = 'submit';
@@ -56,7 +56,7 @@
         activatedBtnList.appendChild(activatedBtn);
     }
 
-     for(i = 0; i < {{activatedNmb}}; i++){
+    for (i = 0; i < {{ activatedNmb }}; i++) {
         createActivatedBtn();
     }
 </script>

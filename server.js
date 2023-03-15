@@ -8,7 +8,10 @@ const port = process.env.PORT || 3000;
 
 //Loads the handlebars module
 const handlebars = require('express-handlebars');
-const { MongoClient, ServerApiVersion} = require('mongodb');
+const {
+    MongoClient,
+    ServerApiVersion
+} = require('mongodb');
 
 const uri =
     "mongodb+srv://" +
@@ -22,7 +25,11 @@ const uri =
     "/" +
     "?tls=true&retryWrites=true&w=majority";
 
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 })
+const client = new MongoClient(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverApi: ServerApiVersion.v1
+})
 
 // client.connect()
 //     .then((res) => console.log('@@-- connection established', res))
@@ -38,7 +45,9 @@ client.connect()
 //Sets our app to use the handlebars engine
 app.set('view engine', 'hbs');
 app.use(express.static('public'));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({
+    extended: true
+}));
 //Sets handlebars configurations (we will go through them later on)
 app.engine('hbs', handlebars.engine({
     layoutsDir: __dirname + '/views/layouts',
@@ -49,14 +58,19 @@ app.engine('hbs', handlebars.engine({
 
 // routes
 app.get('/', (req, res) => {
-    res.render('main', { layout: 'index' });
+    res.render('main', {
+        layout: 'index'
+    });
 });
 
 app.get('/activities', async (req, res) => {
     const activitiesCollection = await client.db('calenderdb').collection('activities');
     // const activities = await activitiesCollection.find().toArray();
     const query = {};
-    const projection = { name: 1, _id: 0 };
+    const projection = {
+        name: 1,
+        _id: 0
+    };
     const cursor = activitiesCollection.find(query, projection);
     const data = await cursor.toArray();
     const namesNmb = data.length;
@@ -65,27 +79,27 @@ app.get('/activities', async (req, res) => {
     let a = {};
 
     for (var i = 0; i < data.length; i++) {
-       a = names[i]
+        a = names[i]
     }
     // console.log(a);
 
 
 
     const activatedCollection = await client.db('calenderdb').collection('morning');
-    const activatedCursor = activatedCollection.find(query,projection);
+    const activatedCursor = activatedCollection.find(query, projection);
     const activatedData = await activatedCursor.toArray();
     const activatedNames = activatedData.map(activatedData => activatedData.name);
     const activatedNmb = activatedNames.length;
 
     // console.log(activities);
-    res.render('activities', { 
+    res.render('activities', {
         layout: 'activities',
         activatedActivity: activatedNames,
         activatedNmb: activatedNmb,
         activity: a,
         namesLength: namesNmb
     })
-    
+
 });
 
 app.post('/post-name', (req, res) => {
@@ -93,28 +107,36 @@ app.post('/post-name', (req, res) => {
     // console.log(collectionTimespace);
     const activitiesCollection = client.db('calenderdb').collection('morning');
     const name = req.body.name;
-  console.log('Name:', name);
-      activitiesCollection.insertOne({ name }, (err, result) => {
+    console.log('Name:', name);
+    activitiesCollection.insertOne({
+        name
+    }, (err, result) => {
         if (err) {
-          console.error(err);
-          client.close();
-          return res.status(500).json({ error: 'Failed to insert name' });
+            console.error(err);
+            client.close();
+            return res.status(500).json({
+                error: 'Failed to insert name'
+            });
         }
         client.close();
-        res.json({ message: 'Name inserted successfully' });
-      });
-      res.redirect('/activities');
+        res.json({
+            message: 'Name inserted successfully'
+        });
     });
+    res.redirect('/activities');
+});
 
 app.get('/deleteData', function(req, res) {
     const deleteName = req.body.deleteName;
     const activatedCollection = client.db('calenderdb').collection('morning');
     console.log('Deleted data with ID ' + deleteName);
-    activatedCollection.deleteOne({ deleteName }, function(err, result) {
-      if (err) throw err;
-      console.log('Deleted data with ID ' + deleteName);
-      
+    activatedCollection.deleteOne({
+        deleteName
+    }, function(err, result) {
+        if (err) throw err;
+        console.log('Deleted data with ID ' + deleteName);
+
     });
     res.redirect('/activities');
-  });
+});
 app.listen(port, () => console.log(`App listening to port ${port}`));

@@ -28,7 +28,7 @@ input[type="reset"] {
     outline: inherit;
 }
 
-a{
+a {
     all: unset;
 }
 
@@ -312,17 +312,17 @@ p {
     align-self: center;
 }
 
-.activatedListSetup{
+.activatedListSetup {
     display: flex;
     flex-direction: row;
-    justify-content:start;
+    justify-content: start;
     margin: 0.2em;
     gap: 0.5em;
     overflow-x: auto;
     flex-wrap: wrap;
 }
 
-.activatedListBtnSetup{
+.activatedListBtnSetup {
     background-image: url(/assets/zelensky.jpeg);
     width: 1em;
     height: 1em;
@@ -364,7 +364,7 @@ p {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    
+
 
     border-left: 2px solid var(--black);
 }
@@ -438,13 +438,13 @@ p {
     width: 30%;
 }
 
-.doneFooter{
+.doneFooter {
     display: flex;
     justify-content: center;
     width: 100%;
 }
 
-.doneBtn{
+.doneBtn {
     border: 1px solid var(--black);
     background-color: var(--white);
     display: inline-block;
@@ -453,7 +453,7 @@ p {
     border-radius: 2em;
     box-sizing: border-box;
     font-family: var(--font-body);
-    font-size:larger;
+    font-size: larger;
     color: var(--white);
     background-color: var(--button-color);
     text-align: center;
