@@ -6,6 +6,9 @@
         {{!-- <button class="acitvitySetupBtn">&#128262; Knutselen</button>
         <button class="acitvitySetupBtn">&#128262; Knutselen</button>
         <button class="acitvitySetupBtn">{{activity}}</button> --}}
+        {{#each activity}}
+    <button class="acitvitySetupBtn" name="activity" value="{{this}}">{{this}}</button>
+  {{/each}}
 
     </form>
 </section>
@@ -14,6 +17,7 @@
     <button type="submit" name="name" value="John">Submit</button>
 </form> --}}
 
+
 <section>
     <form class="doneFooter" action="http://localhost:3000/">
         <button class="doneBtn" type="submit">Done</button>
@@ -21,7 +25,7 @@
 </section>
 
 
-<script>
+{{!-- <script>
     const activityListBtns = document.querySelector(".activitiesListBtns");
 
 
@@ -38,4 +42,4 @@
     for (i = 0; i < {{ namesLength }}; i++) {
         createBtnList();
     }
-</script>
+</script> --}}
