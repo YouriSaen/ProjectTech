@@ -44,7 +44,7 @@ const client = new MongoClient(uri, {
 client.connect()
     .then((res) => console.log('@@-- connection established', res))
     .catch((err) => console.log('@@-- error', err));
-
+    let dbName = 'morning';
 
 
 //Sets our app to use the handlebars engine
@@ -77,9 +77,6 @@ app.get('/', (req, res) => {
 });
 
 app.get('/activities', async (req, res) => {
-    const dbName = req.body.timespaceBtn;
-    req.dbName = dbName;
-
     const activitiesCollection = await client.db('calenderdb').collection('activities');
     // const activities = await activitiesCollection.find().toArray();
     const query = {};
@@ -128,18 +125,31 @@ app.get('/activities', async (req, res) => {
 
 const ObjectId = require('mongodb').ObjectId;
 
-app.post('/post-db', (req, res) => {
-    const dbName = req.body.timespaceBtn;
-    req.dbName = dbName;
-    res.redirect('/activities');
-});
+// app.get('/getMidday', async (req, res) => {
+//     // const dbName = req.body.timespaceBtn;
+//     // req.dbName = dbName;
+//     // res.redirect('/activities');
+//     dbName = 'midday'
+//     // const middayCollection = await client.db('calenderdb').collection('midday').find({});
+//     // const formattedCollection = middayCollection.toArray();
+//     // console.log('@@-- midday collection', formattedCollection);
+
+//     res.render('calenderSetup', {
+//         activatedActivityMidday: formattedCollection
+//     });
+
+// });
+
+
 
 
 app.post('/post-name', (req, res) => {
     const name = req.body.activity;
-    const dbName = req.dbName;
+    let dbName = req.body.typeOfDay;
+    console.log(dbName);
+
     console.log("READ THIS:::String", dbName);
-    let activatedCollection = client.db('calenderdb').collection('morning');
+    let activatedCollection = client.db('calenderdb').collection(dbName);
 
     activatedCollection.insertOne({
         _id: new ObjectId(), // generate a new unique identifier for each document

@@ -1,14 +1,23 @@
 <section class="activitiesList">
     <h1 class="headerList">Waar heb je zin in?</h1>
-    <input type="text" placeholder="Search..">
+    <section class="typeOfDay">
+    <input type="radio" id="morning" name="timeOfDay" value="morning">
+    <label for="morning">&#127749;</label>
+
+    <input type="radio" id="midday" name="timeOfDay" value="midday">
+    <label for="midday">&#128262;</label>
+
+    <input type="radio" id="evening" name="timeOfDay" value="evening">
+    <label for="evening">&#127769;</label>
+    </section>
 
     <form class="activitiesListBtns" action="/post-name" method="POST">
         {{!-- <button class="acitvitySetupBtn">&#128262; Knutselen</button>
         <button class="acitvitySetupBtn">&#128262; Knutselen</button>
         <button class="acitvitySetupBtn">{{activity}}</button> --}}
         {{#each activity}}
-    <button class="acitvitySetupBtn" name="activity" value="{{this}}">{{this}}</button>
-  {{/each}}
+        <button class="acitvitySetupBtn" name="activity" value="{{this}}">{{this}}</button>
+        {{/each}}
 
     </form>
 </section>

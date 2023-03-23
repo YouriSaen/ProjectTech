@@ -389,6 +389,12 @@ p {
 
 
 /* Activities list */
+.typeOfDay{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 
 .activitiesList {
     display: flex;
@@ -396,7 +402,7 @@ p {
     width: 100%;
 }
 
-.activitiesList>input[type=text] {
+.activitiesList>input {
     padding: 0.5em 0.5em;
     border-radius: 2em;
     box-sizing: border-box;
