@@ -1,25 +1,22 @@
 <section class="activitiesList">
     <h1 class="headerList">Waar heb je zin in?</h1>
+    <form action="/update" method="POST">
     <section class="typeOfDay">
-    <input type="radio" id="morning" name="timeOfDay" value="morning">
-    <label for="morning">&#127749;</label>
+        <div class="inputLabel"><input type="radio" id="morning" name="timeOfDay" value="morning">
+    <label for="morning">&#127749;</label></div>
 
-    <input type="radio" id="midday" name="timeOfDay" value="midday">
-    <label for="midday">&#128262;</label>
+    <div class="inputLabel"><input type="radio" id="midday" name="timeOfDay" value="midday">
+    <label for="midday">&#128262;</label></div>
 
-    <input type="radio" id="evening" name="timeOfDay" value="evening">
-    <label for="evening">&#127769;</label>
+    <div class="inputLabel"><input type="radio" id="evening" name="timeOfDay" value="evening">
+    <label for="evening">&#127769;</label></div>
     </section>
-
-    <form class="activitiesListBtns" action="/post-name" method="POST">
-        {{!-- <button class="acitvitySetupBtn">&#128262; Knutselen</button>
-        <button class="acitvitySetupBtn">&#128262; Knutselen</button>
-        <button class="acitvitySetupBtn">{{activity}}</button> --}}
+    <section class="activitiesListBtns">
         {{#each activity}}
-        <button class="acitvitySetupBtn" name="activity" value="{{this}}">{{this}}</button>
+        <button name="activity" class="acitvitySetupBtn" value="{{this}}">{{this}}</button></a>
         {{/each}}
-
-    </form>
+        </section>
+        </form>
 </section>
 
 {{!-- <form action="/post-name" method="POST">

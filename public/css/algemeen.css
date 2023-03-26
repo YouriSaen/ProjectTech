@@ -393,6 +393,22 @@ p {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    gap: 1em;
+}
+
+.inputLabel{
+    display: flex;
+    flex-direction: column;
+}
+
+.inputLabel>input{
+    height: 1.5em;
+    width: 1.5em;
+}
+
+.inputLabel>label{
+    align-self: center;
+    font-size: larger;
 }
 
 

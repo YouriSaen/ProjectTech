@@ -44,7 +44,6 @@ const client = new MongoClient(uri, {
 client.connect()
     .then((res) => console.log('@@-- connection established', res))
     .catch((err) => console.log('@@-- error', err));
-    let dbName = 'morning';
 
 
 //Sets our app to use the handlebars engine
@@ -82,6 +81,7 @@ app.get('/activities', async (req, res) => {
     const query = {};
     const projection = {
         name: 1,
+        timeOfDay: 1,
         _id: 0
     };
     const cursor = await activitiesCollection.find(query, projection).toArray();
@@ -90,98 +90,60 @@ app.get('/activities', async (req, res) => {
     const namesNmb = cursor.length;
     const names = cursor.map(data => data.name);
     // console.log(names);
-    let a = [];
-    cursor.map((elem) => a.push(elem.name));
+    // let a = [];
+    // cursor.map((elem) => a.push(elem.name));
 
-    const activatedCollectionMorning = await client.db('calenderdb').collection('morning');
-    const activatedCursorMorning = activatedCollectionMorning.find(query, projection);
-    const activatedDataMorning = await activatedCursorMorning.toArray();
-    const activatedNamesMorning = activatedDataMorning.map(activatedData => activatedData.name);
-    const activatedNmbMorning = activatedNamesMorning.length;
+    const activatedCollection = await client.db('calenderdb').collection('activities');
+    const activatedCursor = activatedCollection.find(query, projection);
+    const activatedData = await activatedCursor.toArray();
+    const timeOfDay = activatedData.map(activatedData => activatedData.timeOfDay);
+    const activity = activatedData.map(activatedData => activatedData.name);
 
-    const activatedCollectionMidday  = await client.db('calenderdb').collection('midday');
-    const activatedCursorMidday = activatedCollectionMidday.find(query, projection);
-    const activatedDataMidday = await activatedCursorMidday.toArray();
-    const activatedNamesMidday = activatedDataMidday.map(activatedData => activatedData.name);
-    const activatedNmbMidday = activatedNamesMidday.length;
+    const morningActivities = activatedData.filter(data => data.timeOfDay === 'morning');
+    const middayActivities = activatedData.filter(data => data.timeOfDay === 'midday');
+    const eveningActivities = activatedData.filter(data => data.timeOfDay === 'evening');
+    console.log(middayActivities);
 
-    const activatedCollectionEvening = await client.db('calenderdb').collection('evening');
-    const activatedCursorEvening = activatedCollectionEvening.find(query, projection);
-    const activatedDataEvening = await activatedCursorEvening.toArray();
-    const activatedNamesEvening = activatedDataEvening.map(activatedData => activatedData.name);
-    const activatedNmbEvening = activatedNamesEvening.length;
+
+    console.log("READ THIS::::ACTIVITIES",timeOfDay);
 
     // console.log(activities);
     res.render('activities', {
         layout: 'activities',
-        activatedActivityMorning: activatedNamesMorning,
-        activatedActivityMidday: activatedNamesMidday,
-        activatedActivityEvening: activatedNamesEvening,
-        activatedNmb: activatedNmbMorning,
-        activity: a,
-        namesLength: namesNmb
+        activatedActivity: activity,
+        timeOfDay: timeOfDay,
+        activity: activity,
+        morningActivities: morningActivities,
+        middayActivities: middayActivities,
+        eveningActivities: eveningActivities,
     })
 });
 
-const ObjectId = require('mongodb').ObjectId;
+app.get('/chooseTime', (req, res) => {
 
-// app.get('/getMidday', async (req, res) => {
-//     // const dbName = req.body.timespaceBtn;
-//     // req.dbName = dbName;
-//     // res.redirect('/activities');
-//     dbName = 'midday'
-//     // const middayCollection = await client.db('calenderdb').collection('midday').find({});
-//     // const formattedCollection = middayCollection.toArray();
-//     // console.log('@@-- midday collection', formattedCollection);
-
-//     res.render('calenderSetup', {
-//         activatedActivityMidday: formattedCollection
-//     });
-
-// });
-
-
-
-
-app.post('/post-name', (req, res) => {
     const name = req.body.activity;
-    let dbName = req.body.typeOfDay;
-    console.log(dbName);
-
-    console.log("READ THIS:::String", dbName);
-    let activatedCollection = client.db('calenderdb').collection(dbName);
-
-    activatedCollection.insertOne({
-        _id: new ObjectId(), // generate a new unique identifier for each document
-        name
-    }, (err, result) => {
-        if (err) {
-            console.error(err);
-            client.close();
-            return res.status(500).json({
-                error: 'Failed to insert name'
-            });
-        }
-        client.close();
-        res.json({
-            message: 'Name inserted successfully'
-        });
-    });
-
-    res.redirect('/activities');
+    console.log("READ THIS::::", name);
+    res.render('choosetime', {
+        layout: 'activities',
+        activity: name
+    })
 });
 
-app.get('/deleteData', function(req, res) {
-    const deleteName = req.body.deleteName;
-    const activatedCollection = client.db('calenderdb').collection('midday');
-    // console.log('Deleted data with ID ' + deleteName);
-    activatedCollection.deleteOne({
-        deleteName
-    }, function(err, result) {
-        if (err) throw err;
-        // console.log('Deleted data with ID ' + deleteName);
 
-    });
+app.post('/update', async (req, res) => {
+    const activity = req.body.activity; // get the button value from the request body
+    const timeOfDay = req.body.timeOfDay;
+    const activitiesCollection = await client.db('calenderdb').collection('activities');
+    console.log(timeOfDay, "<Timeoday", "activity>", activity);
+    await activitiesCollection.updateOne({ name: activity }, { $set: { timeOfDay: timeOfDay } }); // update the timeOfDay field of the document with the given name
+    res.redirect('/activities');
+  });
+
+app.post('/unsetTime', async function(req, res) {
+    const deleteName = req.body.activity;
+    const activitiesCollection = client.db('calenderdb').collection('activities');
+    // console.log(timeOfDay, "<Timeoday", "activity>", activity);
+    await activitiesCollection.updateOne({ name: deleteName }, { $unset: { timeOfDay: null } });
     res.redirect('/activities');
 });
 

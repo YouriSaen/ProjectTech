@@ -20,12 +20,10 @@
 
     {{!-- MORNING --}}
     <sector class="morningSpaceSetup">
-        <form class="activitiesListBtns" action="/post-db" method="POST">
-        <button class="headerSpaceSetup" name="timespaceBtn"  value="morning"> &#127749; Morning</button>
-        </form>
-        <form class="activatedListSetup" action="/deleteData" method="DELETE">
-        {{#each activatedActivityMorning}}
-            <button class="activatedListBtnSetup" name="activity" value="{{this}}"></button>
+        <button class="headerSpaceSetup"> &#127749; Morning</button>
+        <form class="activatedListSetup" action="/unsetTime" method="POST">
+        {{#each morningActivities}}
+            <button class="activatedListBtnSetup" name="activity" value="{{this.name}}"></button>
         {{/each}}
         </form>
         <button class="disableBtn"><img class="disableSpace"></button>
@@ -34,26 +32,21 @@
 
     {{!-- MIDDAY --}}
     <sector class="middaySpaceSetup">
-         <form class="activitiesListBtns" action="/post-name" method="POST">
-         <button class="headerSpaceSetup" name="timespaceBtn" value="midday">&#128262; Midday</button>
-         </form>
-        <form class="activatedListSetup" action="/deleteData" method="DELETE">
-        {{#each activatedActivityMidday}}
-            <button class="activatedListBtnSetup" name="activity" value="{{this}}"></button>
+         <button class="headerSpaceSetup">&#128262; Midday</button>
+        <form class="activatedListSetup" action="/unsetTime" method="POST">
+        {{#each middayActivities}}
+            <button class="activatedListBtnSetup" name="activity" value="{{this.name}}"></button>
         {{/each}}
         </form>
         <button class="disableBtn"><img class="disableSpace"></button>
-
     </sector>
 
     {{!-- EVENING --}}
     <sector class="eveningSpaceSetup">
-        <form class="activitiesListBtns" action="/post-db" method="POST">
-        <button class="headerSpaceSetup" name="timespaceBtn" value="evening">&#127769; Evening</button>
-        </form>
-        <form class="activatedListSetup" action="/deleteData" method="DELETE">
-        {{#each activatedActivityEvening}}
-            <button class="activatedListBtnSetup" name="activity" value="{{this}}"></button>
+        <button class="headerSpaceSetup">&#127769; Evening</button>
+        <form class="activatedListSetup" action="/unsetTime" method="POST">
+        {{#each eveningActivities}}
+            <button class="activatedListBtnSetup" name="activity" value="{{this.name}}"></button>
         {{/each}}
         </form>
         <button class="disableBtn"><img class="disableSpace"></button>
