@@ -1,22 +1,31 @@
-require('dotenv').config();
 //Loads Express module
 const express = require('express');
 var bodyParser = require('body-parser')
-const http = require('http');
 const session = require('express-session');
 const app = express();
-const server = http.createServer(app); 
+
+// dot ENV
+require('dotenv').config();
+
+// 
+const Handlebars = require('handlebars');
+const handlebars = require('express-handlebars');
+
+// API
+const axios = require('axios');
+
+
+
+
+
 
 const port = process.env.PORT || 3000;
 
-
-//Loads the handlebars module
-const handlebars = require('express-handlebars');
+// MongoDB
 const {
     MongoClient,
     ServerApiVersion
 } = require('mongodb');
-const { css } = require('js-beautify');
 
 const uri =
     "mongodb+srv://" +
@@ -34,11 +43,7 @@ const client = new MongoClient(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     serverApi: ServerApiVersion.v1
-})
-
-// client.connect()
-//     .then((res) => console.log('@@-- connection established', res))
-//     .catch((err) => console.log('@@-- error', err));
+});
 
 
 client.connect()
@@ -60,7 +65,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true
   }));
-//Sets handlebars configurations (we will go through them later on)
+//Sets handlebars configurations
 app.engine('hbs', handlebars.engine({
     layoutsDir: __dirname + '/views/layouts',
     extname: 'hbs',
@@ -76,8 +81,9 @@ app.get('/', (req, res) => {
 });
 
 app.get('/activities', async (req, res) => {
+    const hours = new Date().getHours()
+    console.log(hours);
     const activitiesCollection = await client.db('calenderdb').collection('activities');
-    // const activities = await activitiesCollection.find().toArray();
     const query = {};
     const projection = {
         name: 1,
@@ -85,13 +91,6 @@ app.get('/activities', async (req, res) => {
         _id: 0
     };
     const cursor = await activitiesCollection.find(query, projection).toArray();
-    // const data = await cursor.toArray();
-    console.log(cursor);
-    const namesNmb = cursor.length;
-    const names = cursor.map(data => data.name);
-    // console.log(names);
-    // let a = [];
-    // cursor.map((elem) => a.push(elem.name));
 
     const activatedCollection = await client.db('calenderdb').collection('activities');
     const activatedCursor = activatedCollection.find(query, projection);
@@ -104,19 +103,27 @@ app.get('/activities', async (req, res) => {
     const eveningActivities = activatedData.filter(data => data.timeOfDay === 'evening');
     console.log(middayActivities);
 
+    const params = {
+        access_key: '408856757f28ef5526a9f87e23fced8a',
+        query: 'Amsterdam, The Netherlands'
+      }
+      
+      const response = await axios.get('http://api.weatherstack.com/current', {params});
+    const apiResponse = response.data;
+    const weatherResponse =`Current temperature in ${apiResponse.location.name} is ${apiResponse.current.temperature}℃`;
 
-    console.log("READ THIS::::ACTIVITIES",timeOfDay);
+    console.log("READ THIS::::WEATHER",weatherResponse);
 
-    // console.log(activities);
     res.render('activities', {
-        layout: 'activities',
-        activatedActivity: activity,
-        timeOfDay: timeOfDay,
-        activity: activity,
-        morningActivities: morningActivities,
-        middayActivities: middayActivities,
-        eveningActivities: eveningActivities,
-    })
+      layout: 'activities',
+      activatedActivity: activity,
+      timeOfDay: timeOfDay,
+      activity: activity,
+      morningActivities: morningActivities,
+      middayActivities: middayActivities,
+      eveningActivities: eveningActivities,
+      weatherResponse: weatherResponse
+    });
 });
 
 app.get('/chooseTime', (req, res) => {
@@ -142,7 +149,6 @@ app.post('/update', async (req, res) => {
 app.post('/unsetTime', async function(req, res) {
     const deleteName = req.body.activity;
     const activitiesCollection = client.db('calenderdb').collection('activities');
-    // console.log(timeOfDay, "<Timeoday", "activity>", activity);
     await activitiesCollection.updateOne({ name: deleteName }, { $unset: { timeOfDay: null } });
     res.redirect('/activities');
 });

@@ -32,7 +32,11 @@
 
     {{!-- MIDDAY --}}
     <sector class="middaySpaceSetup">
-         <button class="headerSpaceSetup">&#128262; Midday</button>
+        {{#if hoursGreaterThan}}
+            <p class="headerSpaceSetup" style="color: aquamarine;">&#128262; Midday</p>
+        {{else}}
+            <p class="headerSpaceSetup" style="color: blue;">&#128262; Midday</p>
+        {{/if}}
         <form class="activatedListSetup" action="/unsetTime" method="POST">
         {{#each middayActivities}}
             <button class="activatedListBtnSetup" name="activity" value="{{this.name}}"></button>
