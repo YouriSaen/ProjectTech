@@ -22,9 +22,9 @@
     <sector class="morningSpaceSetup">
         <button class="headerSpaceSetup"> &#127749; Morning</button>
         <form class="activatedListSetup" action="/unsetTime" method="POST">
-        {{#each morningActivities}}
+            {{#each morningActivities}}
             <button class="activatedListBtnSetup" name="activity" value="{{this.name}}"></button>
-        {{/each}}
+            {{/each}}
         </form>
         <button class="disableBtn"><img class="disableSpace"></button>
     </sector>
@@ -33,14 +33,14 @@
     {{!-- MIDDAY --}}
     <sector class="middaySpaceSetup">
         {{#if hoursGreaterThan}}
-            <p class="headerSpaceSetup" style="color: aquamarine;">&#128262; Midday</p>
+        <p class="headerSpaceSetup" style="color: aquamarine;">&#128262; Midday</p>
         {{else}}
-            <p class="headerSpaceSetup" style="color: blue;">&#128262; Midday</p>
+        <p class="headerSpaceSetup" style="color: blue;">&#128262; Midday</p>
         {{/if}}
         <form class="activatedListSetup" action="/unsetTime" method="POST">
-        {{#each middayActivities}}
+            {{#each middayActivities}}
             <button class="activatedListBtnSetup" name="activity" value="{{this.name}}"></button>
-        {{/each}}
+            {{/each}}
         </form>
         <button class="disableBtn"><img class="disableSpace"></button>
     </sector>
@@ -49,9 +49,9 @@
     <sector class="eveningSpaceSetup">
         <button class="headerSpaceSetup">&#127769; Evening</button>
         <form class="activatedListSetup" action="/unsetTime" method="POST">
-        {{#each eveningActivities}}
+            {{#each eveningActivities}}
             <button class="activatedListBtnSetup" name="activity" value="{{this.name}}"></button>
-        {{/each}}
+            {{/each}}
         </form>
         <button class="disableBtn"><img class="disableSpace"></button>
     </sector>
