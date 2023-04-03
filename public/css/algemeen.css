@@ -389,24 +389,24 @@ p {
 
 
 /* Activities list */
-.typeOfDay{
+.typeOfDay {
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 1em;
 }
 
-.inputLabel{
+.inputLabel {
     display: flex;
     flex-direction: column;
 }
 
-.inputLabel>input{
+.inputLabel>input {
     height: 1.5em;
     width: 1.5em;
 }
 
-.inputLabel>label{
+.inputLabel>label {
     align-self: center;
     font-size: larger;
 }
